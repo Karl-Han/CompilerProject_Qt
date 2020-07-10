@@ -21,6 +21,7 @@ SOURCES += \
     main.cpp \
     stage1/y.tab.c \
     stage1/lex.yy.c \
+    stage1/gen_dot.c \
     syndialog.cpp
 
 HEADERS += \
@@ -28,6 +29,7 @@ HEADERS += \
     stage1/y.tab.h \
     stage1/token.h \
     stage1/lexee.h \
+    stage1/gen_dot.h \
     mydialog.h \
     syndialog.h
 

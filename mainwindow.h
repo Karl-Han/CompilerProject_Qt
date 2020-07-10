@@ -1,9 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "mydialog.h"
 #include "syndialog.h"
+
+#include <QMainWindow>
+#include <QStandardItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,8 +18,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QString s_dot;
-    QString s_syn;
+    // QString lexical_str;
+    QStandardItemModel *lexical_model;
+    QString syntax_str;
 
 private slots:
     void on_pushButton_clicked();
@@ -29,6 +32,8 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_radioButton_toggled(bool checked);
+
+    void on_radioButton_clicked();
 
 private:
     Ui::MainWindow *ui;
