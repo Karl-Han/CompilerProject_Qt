@@ -17,26 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     mainwindow.cpp \
-    mydialog.cpp \
     main.cpp \
     stage1/y.tab.c \
     stage1/lex.yy.c \
-    stage1/gen_dot.c \
-    syndialog.cpp
+    stage1/gen_dot.c
 
 HEADERS += \
     mainwindow.h \
     stage1/y.tab.h \
     stage1/token.h \
     stage1/lexee.h \
-    stage1/gen_dot.h \
-    mydialog.h \
-    syndialog.h
+    stage1/gen_dot.h
 
 FORMS += \
-    mainwindow.ui \
-    mydialog.ui \
-    syndialog.ui
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

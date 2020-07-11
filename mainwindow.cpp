@@ -1,3 +1,40 @@
+/* 
+ * MIT License
+ * 
+ * Copyright (c) [year] [fullname]
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* 
+ * Author: Karl Han
+ * Version: 0.0.1
+ * Modified date: 2020-07-10
+ */
+
+/* 
+ * File name: mainwindow.cpp
+ * Main usage: Define the functions declared in mainwindow.h, and combine parser to 
+ *              generate output
+ * 
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -204,33 +241,33 @@ void MainWindow::on_pushButton_3_clicked()
 
 }
 
-void MainWindow::on_pushButton_4_clicked()
-{
-    QStandardItemModel *model = new QStandardItemModel();
-    model->setColumnCount(2);
-    model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("卡号"));
-    model->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("姓名"));
-
-    ui->tableView_lexical->setModel(model);
-    //表头信息显示居左
-    ui->tableView_lexical->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-    //设置列宽不可变
-    // ui->tableView->horizontalHeader()->setResizeMode(0,QHeaderView::Fixed);
-    // ui->tableView->horizontalHeader()->setResizeMode(1,QHeaderView::Fixed);
-    // ui->tableView->setColumnWidth(0,101);
-    // ui->tableView->setColumnWidth(1,102);
-
-
-    for(int i = 0; i < 3; i++)
-    {
-        model->setItem(i,0,new QStandardItem("2009441676"));
-           //设置字符颜色
-        model->item(i,0)->setForeground(QBrush(QColor(255, 0, 0)));
-           //设置字符位置
-        model->item(i,0)->setTextAlignment(Qt::AlignCenter);
-        model->setItem(i,1,new QStandardItem(QString::fromLocal8Bit("哈哈1233333333333333333333333")));
-    }
-}
+// void MainWindow::on_pushButton_4_clicked()
+// {
+//     QStandardItemModel *model = new QStandardItemModel();
+//     model->setColumnCount(2);
+//     model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("卡号"));
+//     model->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("姓名"));
+//
+//     ui->tableView_lexical->setModel(model);
+//     //表头信息显示居左
+//     ui->tableView_lexical->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+//     //设置列宽不可变
+//     // ui->tableView->horizontalHeader()->setResizeMode(0,QHeaderView::Fixed);
+//     // ui->tableView->horizontalHeader()->setResizeMode(1,QHeaderView::Fixed);
+//     // ui->tableView->setColumnWidth(0,101);
+//     // ui->tableView->setColumnWidth(1,102);
+//
+//
+//     for(int i = 0; i < 3; i++)
+//     {
+//         model->setItem(i,0,new QStandardItem("2009441676"));
+//            //设置字符颜色
+//         model->item(i,0)->setForeground(QBrush(QColor(255, 0, 0)));
+//            //设置字符位置
+//         model->item(i,0)->setTextAlignment(Qt::AlignCenter);
+//         model->setItem(i,1,new QStandardItem(QString::fromLocal8Bit("哈哈1233333333333333333333333")));
+//     }
+// }
 
 void MainWindow::on_radioButton_toggled(bool checked)
 {

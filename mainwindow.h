@@ -1,9 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "mydialog.h"
-#include "syndialog.h"
-
 #include <QMainWindow>
 #include <QStandardItem>
 
@@ -29,16 +26,12 @@ private slots:
 
     void on_pushButton_3_clicked();
 
-    void on_pushButton_4_clicked();
-
     void on_radioButton_toggled(bool checked);
 
     void on_radioButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-    Dialog* d;
-    SynDialog* sd;
 
     // customized section
     void process(std::string);
