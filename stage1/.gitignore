@@ -33,10 +33,7 @@
 /**/*.dSYM
 /**/main
 /**/.DS_Store
-lex.yy.c
 /**/*.output
-/**/*.tab.c
-/**/*.tab.h
 /**/*.dot
 /**/*.html
 /**/*.jpg
