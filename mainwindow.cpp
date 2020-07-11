@@ -145,11 +145,25 @@ void set_lexical_tableView(QStandardItemModel* model, LexeeLinkedlist* lexee){
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString s = ui->textEdit->toPlainText();
-    process(s.toStdString());
-    // d = new Dialog(this, s_dot);
-    // d->show();
-    ui->textEdit->setText(s);
+    QString s = ui->textBrowser_syntax->toPlainText();
+    QString fileName;
+    fileName = QFileDialog::getSaveFileName(this,
+        tr("Path"), "", tr("DOT(*.dot)"));
+
+    if(!fileName.isNull()){
+        // if it has a name
+        QFile output(fileName);
+        if (!output.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+        QTextStream output_stream(&output);
+        output_stream << s;
+    }
+    else{
+     QMessageBox::information(
+         this,
+         tr("ERROR"),
+         tr("Invalid filename, Please save it again."));
+    }
 }
 
 // Process button
