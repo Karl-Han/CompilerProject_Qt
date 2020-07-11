@@ -1,7 +1,7 @@
 /* 
  * MIT License
  * 
- * Copyright (c) [year] [fullname]
+ * Copyright (c) 2020 Karl Han
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -83,7 +83,7 @@ char *gen_dot_str(TreeNode *t)
   fseek(f, 0, SEEK_END);
   long fsize = ftell(f);
   fseek(f, 0, SEEK_SET);
-  char *buf = (char *)malloc(fsize +1);
+  char *buf = (char *)malloc(fsize + 1);
   fread(buf, 1, fsize, f);
   buf[fsize] = 0;
   fclose(f);
