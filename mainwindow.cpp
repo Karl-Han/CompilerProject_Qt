@@ -96,21 +96,6 @@ std::string file2string(FILE *f)
     return s;
 }
 
-void print_node(TreeNode *tn)
-{
-    // QString str;
-    // str += "Token:" + QString(tn->token);
-    // str += "\nnum:" + QString(tn->num);
-    // str += "\nstr:" + QString(tn->str);
-    // char buf[32];
-    // sprintf(buf, "%x", tn->sibling);
-    // str += "\nsibling:" + QString(buf);
-
-    char buf[128];
-    sprintf(buf, "Token:%d\nnum:%d\nstr:%s\nsibling:%x", tn->token, tn->num, tn->str, tn->sibling);
-    QMessageBox::information(nullptr, "", QString(buf));
-}
-
 void set_lexical_tableView(QStandardItemModel *model, LexeeLinkedlist *lexee);
 
 // Main process function
@@ -118,54 +103,40 @@ void MainWindow::process(std::string s)
 {
     // prepare for failure of parsing
     std::stringstream buffer;
-    // std::streambuf * old = std::cerr.rdbuf(buffer.rdbuf());
-    std::streambuf *old = std::cerr.rdbuf(buffer.rdbuf());
-
-    std::cerr << "This is error message." << std::endl;
-    std::cout << s << std::endl;
 
     FILE *fp = tmpfile();
     fprintf(fp, "%s", s.c_str());
     std::rewind(fp);
-    yyin = stdin = fp;
+    yyin = fp;
 
-    FILE *err = stderr;
-    fprintf(err, "Hello World");
-    // std::rewind(err);
     std::string str;
     char buf[128];
-    // setbuf(stderr, buf);
-    // str = std::string(buf);
+    memset(buf, 0, sizeof(buf));
     char *filename = "tmp";
-    remove(filename);
     FILE *capture = freopen(filename, "w", stderr);
     int ret = yyparse();
     fclose(capture);
 
     capture = fopen(filename, "r");
-    memset(buf, 0, sizeof(buf));
     while (fgets(buf, sizeof(buf), capture) != NULL)
     {
-        str += buf + '\n';
+        str += std::string(buf) + std::string("\n");
     }
     fclose(capture);
-    // QMessageBox::information(nullptr, "err", QString::fromStdString(str));
+    remove(filename);
     ui->textBrowser_error->setText(QString::fromStdString(str));
 
-    // std::string text = buffer.str();
-    // QMessageBox::information(nullptr, "err", QString::fromStdString(text));
     if (ret == 1)
     {
         // error occur during parsing
-        printf("FATAL ERROR, unable to skip errors.");
-        this->syntax_str = QString();
+        this->syntax_str = QString::fromLocal8Bit("FATAL ERROR, unable to skip errors.");
+        ui->textBrowser_syntax->setText(this->syntax_str);
         this->lexical_model->removeRows(0, this->lexical_model->rowCount());
     }
     else
     {
         // everything works fine
         TreeNode *syntax_tree = root;
-        // print_node(syntax_tree);
         char *ch = gen_dot_str(syntax_tree);
         this->syntax_str = QString::fromLocal8Bit(ch);
         ui->textBrowser_syntax->setText(this->syntax_str);
@@ -253,34 +224,6 @@ void MainWindow::on_pushButton_3_clicked()
     }
 }
 
-// void MainWindow::on_pushButton_4_clicked()
-// {
-//     QStandardItemModel *model = new QStandardItemModel();
-//     model->setColumnCount(2);
-//     model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("卡号"));
-//     model->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("姓名"));
-//
-//     ui->tableView_lexical->setModel(model);
-//     //表头信息显示居左
-//     ui->tableView_lexical->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-//     //设置列宽不可变
-//     // ui->tableView->horizontalHeader()->setResizeMode(0,QHeaderView::Fixed);
-//     // ui->tableView->horizontalHeader()->setResizeMode(1,QHeaderView::Fixed);
-//     // ui->tableView->setColumnWidth(0,101);
-//     // ui->tableView->setColumnWidth(1,102);
-//
-//
-//     for(int i = 0; i < 3; i++)
-//     {
-//         model->setItem(i,0,new QStandardItem("2009441676"));
-//            //设置字符颜色
-//         model->item(i,0)->setForeground(QBrush(QColor(255, 0, 0)));
-//            //设置字符位置
-//         model->item(i,0)->setTextAlignment(Qt::AlignCenter);
-//         model->setItem(i,1,new QStandardItem(QString::fromLocal8Bit("哈哈1233333333333333333333333")));
-//     }
-// }
-
 void MainWindow::on_radioButton_toggled(bool checked)
 {
     if (checked)
@@ -293,8 +236,4 @@ void MainWindow::on_radioButton_toggled(bool checked)
         ui->tableView_lexical->setVisible(false);
         ui->textBrowser_syntax->setVisible(true);
     }
-}
-
-void MainWindow::on_radioButton_clicked()
-{
 }

@@ -1,39 +1,3 @@
-/* 
- * MIT License
- * 
- * Copyright (c) 2020 Karl Han
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
-/* 
- * Author: Karl Han
- * Version: 0.0.1
- * Modified date: 2020-07-10
- */
-
-/* 
- * File name: lex.yy.c
- * Main usage: Output of scanner.l, the lexer
- * 
- */
-
 
 #line 3 "lex.yy.c"
 
@@ -513,6 +477,42 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "scanner.l"
 #line 2 "scanner.l"
+/* 
+ * MIT License
+ * 
+ * Copyright (c) 2020 Karl Han
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* 
+ * Author: Karl Han
+ * Version: 0.0.1
+ * Modified date: 2020-07-10
+ */
+
+/* 
+ * File name: scanner.l
+ * Main usage: the input file of flex to automatically generate lexer
+ * 
+ */
+
 // Declaration
 // Will be copy to lex.yy.c directly
 #include "token.h"
@@ -542,7 +542,7 @@ void newline();
  * Definition
  * For symbols with specific meaning used afterwards
  */
-#line 510 "lex.yy.c"
+#line 546 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -724,9 +724,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 39 "scanner.l"
+#line 75 "scanner.l"
 
-#line 694 "lex.yy.c"
+#line 730 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -811,100 +811,100 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 40 "scanner.l"
+#line 76 "scanner.l"
 {init_linkedlist(); colno += yyleng; /* Do nothing */}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 41 "scanner.l"
+#line 77 "scanner.l"
 {init_linkedlist(); /* Do nothing */ newline();}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 42 "scanner.l"
+#line 78 "scanner.l"
 {init_linkedlist(); yytoken_kind_t token = getSymbol(yytext[0]);TreeNode* tn = getTreeNode(token); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return token;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 43 "scanner.l"
+#line 79 "scanner.l"
 {init_linkedlist(); int token = Token_int; TreeNode* tn = getTreeNode(Token_int); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_int;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 44 "scanner.l"
+#line 80 "scanner.l"
 {init_linkedlist(); int token = Token_void; TreeNode* tn = getTreeNode(Token_void); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_void;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 45 "scanner.l"
+#line 81 "scanner.l"
 {init_linkedlist(); int token = Token_if; TreeNode* tn = getTreeNode(Token_if); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_if;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 46 "scanner.l"
+#line 82 "scanner.l"
 {init_linkedlist(); int token = Token_else; TreeNode* tn = getTreeNode(Token_else); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_else;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 47 "scanner.l"
+#line 83 "scanner.l"
 {init_linkedlist(); int token = Token_while; TreeNode* tn = getTreeNode(Token_while); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_while;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 48 "scanner.l"
+#line 84 "scanner.l"
 {init_linkedlist(); int token = Token_return; TreeNode* tn = getTreeNode(Token_return); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_return;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 49 "scanner.l"
+#line 85 "scanner.l"
 {init_linkedlist(); int token = Token_lessEqual; TreeNode* tn = getTreeNode(Token_lessEqual); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_lessEqual;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 50 "scanner.l"
+#line 86 "scanner.l"
 {init_linkedlist(); int token = Token_moreEqual; TreeNode* tn = getTreeNode(Token_moreEqual); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_moreEqual;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 51 "scanner.l"
+#line 87 "scanner.l"
 {init_linkedlist(); int token = Token_equal; TreeNode* tn = getTreeNode(Token_equal); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_equal;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 52 "scanner.l"
+#line 88 "scanner.l"
 {init_linkedlist(); int token = Token_noEqual; TreeNode* tn = getTreeNode(Token_noEqual); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_noEqual;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 53 "scanner.l"
+#line 89 "scanner.l"
 {init_linkedlist(); colno += yyleng; comment();}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 54 "scanner.l"
+#line 90 "scanner.l"
 {init_linkedlist(); int token = Token_number;TreeNode* tn = getTreeNode_number(Token_number, atoi(yytext)); yylval.tn = tn; insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_number;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 55 "scanner.l"
+#line 91 "scanner.l"
 {init_linkedlist(); int token = Token_identifier;TreeNode* tn = getTreeNode_identifier(Token_identifier, yytext); yylval.tn = tn;insert_lexee(get_lexee(yytext, tokens[token-tokens_offset], lineno, colno)); colno += yyleng; return Token_identifier;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 56 "scanner.l"
+#line 92 "scanner.l"
 {init_linkedlist(); return 0;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 57 "scanner.l"
+#line 93 "scanner.l"
 {init_linkedlist(); colno += yyleng; yyerror(yytext);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 59 "scanner.l"
+#line 95 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 872 "lex.yy.c"
+#line 908 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1899,7 +1899,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 59 "scanner.l"
+#line 95 "scanner.l"
 
 
 void init_sib_child(TreeNode* tn){
@@ -2069,3 +2069,4 @@ Lexee* get_lexee(char* str, char* token, int lineno, int colno){
 //     char* str_token[] = {"Token_if","Token_else","Token_int","Token_void","Token_while","Token_return","Token_plus","Token_minus","Token_multiply","Token_divide","Token_less","Token_lessEqual","Token_more","Token_moreEqual","Token_equal","Token_noEqual","Token_assign","Token_semicolon","Token_comma","Toekn_smallBracket_left","Token_smallBracket_right","Token_middleBracket_left","Token_middleBracket_right","Token_largeBracket_left","Token_largeBracket_right","Token_number","Token_comment","Token_identifier","Token_space", "Token_func_dec", "Token_compound", "Token_var_dec", "Token_para"};
 //     return str_token[t - Token_if];
 // }
+
