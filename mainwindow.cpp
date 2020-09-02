@@ -55,6 +55,10 @@ extern "C"
 #include "stage1/gen_dot.h"
 #include "stage1/lexee.h"
     int yyparse();
+    extern void yyrestart(FILE*);
+    // extern void reset_lex();
+    // extern int yylex_destroy();
+    extern void flush_buffer();
     char *gen_dot_str(TreeNode *);
     extern FILE *yyin;
     extern FILE *stderr;
@@ -108,6 +112,7 @@ void MainWindow::process(std::string s)
     fprintf(fp, "%s", s.c_str());
     std::rewind(fp);
     yyin = fp;
+    flush_buffer();
 
     std::string str;
     char buf[128];
@@ -116,6 +121,8 @@ void MainWindow::process(std::string s)
     FILE *capture = freopen(filename, "w", stderr);
     int ret = yyparse();
     fclose(capture);
+    // yylex_destroy();
+    // reset_lex();
 
     capture = fopen(filename, "r");
     while (fgets(buf, sizeof(buf), capture) != NULL)

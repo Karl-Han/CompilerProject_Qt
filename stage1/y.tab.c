@@ -111,7 +111,7 @@
  * Token_plus, Token_minus, Token_multiply, Token_divide,
  * 	Token_less, Token_lessEqual, Token_more, Token_moreEqual,
  * 	Token_equal, Token_noEqual, Token_assign, Token_semicolon,
- * 	Token_comma, Toekn_smallBracket_left, Token_smallBracket_right,
+ * 	Token_comma, Token_smallBracket_left, Token_smallBracket_right,
  * 	Token_middleBracket_left, Token_middleBracket_right, 
  * 	Token_largeBracket_left, Token_largeBracket_right,
  * Token_number, Token_comment, Token_identifier, Token_space, Token_none
@@ -124,9 +124,9 @@
 #include <stdio.h>
 // y reduce to x
 #define TRAN(x,y) // printf("%s reduce to %s\n", y, x)
-// yydebug = 1;
+yydebug = 1;
 TreeNode* root;
-
+// void reset_yyin();
 
 #line 132 "y.tab.c"
 
@@ -191,7 +191,7 @@ extern int yydebug;
     Token_assign = 274,            /* Token_assign  */
     Token_semicolon = 275,         /* Token_semicolon  */
     Token_comma = 276,             /* Token_comma  */
-    Toekn_smallBracket_left = 277, /* Toekn_smallBracket_left  */
+    Token_smallBracket_left = 277, /* Token_smallBracket_left  */
     Token_smallBracket_right = 278, /* Token_smallBracket_right  */
     Token_middleBracket_left = 279, /* Token_middleBracket_left  */
     Token_middleBracket_right = 280, /* Token_middleBracket_right  */
@@ -234,7 +234,7 @@ extern int yydebug;
 #define Token_assign 274
 #define Token_semicolon 275
 #define Token_comma 276
-#define Toekn_smallBracket_left 277
+#define Token_smallBracket_left 277
 #define Token_smallBracket_right 278
 #define Token_middleBracket_left 279
 #define Token_middleBracket_right 280
@@ -300,7 +300,7 @@ enum yysymbol_kind_t
   YYSYMBOL_Token_assign = 19,              /* Token_assign  */
   YYSYMBOL_Token_semicolon = 20,           /* Token_semicolon  */
   YYSYMBOL_Token_comma = 21,               /* Token_comma  */
-  YYSYMBOL_Toekn_smallBracket_left = 22,   /* Toekn_smallBracket_left  */
+  YYSYMBOL_Token_smallBracket_left = 22,   /* Token_smallBracket_left  */
   YYSYMBOL_Token_smallBracket_right = 23,  /* Token_smallBracket_right  */
   YYSYMBOL_Token_middleBracket_left = 24,  /* Token_middleBracket_left  */
   YYSYMBOL_Token_middleBracket_right = 25, /* Token_middleBracket_right  */
@@ -718,15 +718,15 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINEYYN -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   120,   120,   123,   126,   127,   130,   131,   134,   135,
-     138,   139,   142,   143,   146,   147,   150,   153,   154,   158,
-     159,   162,   165,   166,   169,   170,   173,   174,   175,   176,
-     177,   180,   181,   184,   185,   188,   191,   192,   195,   196,
-     199,   200,   203,   204,   207,   208,   209,   210,   211,   212,
-     215,   216,   219,   220,   223,   224,   227,   228,   231,   232,
-     233,   234,   237,   240,   241,   244,   247,   248
+       0,   147,   147,   150,   153,   154,   157,   158,   161,   162,
+     165,   166,   169,   170,   173,   174,   177,   180,   181,   185,
+     186,   189,   192,   193,   196,   197,   200,   201,   202,   203,
+     204,   207,   208,   211,   212,   215,   218,   219,   222,   223,
+     226,   227,   230,   231,   234,   235,   236,   237,   238,   239,
+     242,   243,   246,   247,   250,   251,   254,   255,   258,   259,
+     260,   261,   264,   267,   268,   271,   274,   275
 };
 #endif
 
@@ -747,7 +747,7 @@ static const char *const yytname[] =
   "Token_plus", "Token_minus", "Token_multiply", "Token_divide",
   "Token_less", "Token_lessEqual", "Token_more", "Token_moreEqual",
   "Token_equal", "Token_noEqual", "Token_assign", "Token_semicolon",
-  "Token_comma", "Toekn_smallBracket_left", "Token_smallBracket_right",
+  "Token_comma", "Token_smallBracket_left", "Token_smallBracket_right",
   "Token_middleBracket_left", "Token_middleBracket_right",
   "Token_largeBracket_left", "Token_largeBracket_right", "Token_number",
   "Token_comment", "Token_identifier", "Token_space", "Token_none",
@@ -1662,397 +1662,397 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 120 "parser.y"
+#line 147 "parser.y"
                                                         {TRAN("program", "dec_list"); (yyval.tn) = (yyvsp[0].tn); root = (yyval.tn);}
 #line 1668 "y.tab.c"
     break;
 
   case 3:
-#line 123 "parser.y"
+#line 150 "parser.y"
                                                         {TRAN("dec_list","dec, dec_list_sub");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1674 "y.tab.c"
     break;
 
   case 4:
-#line 126 "parser.y"
+#line 153 "parser.y"
                                                         {TRAN("dec_list_sub","dec, dec_list_sub");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1680 "y.tab.c"
     break;
 
   case 5:
-#line 127 "parser.y"
+#line 154 "parser.y"
                                                         {TRAN("dec_list_sub","epsilon"); (yyval.tn) = NULL; }
 #line 1686 "y.tab.c"
     break;
 
   case 6:
-#line 130 "parser.y"
+#line 157 "parser.y"
                                                         {TRAN("dec","var_dec"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1692 "y.tab.c"
     break;
 
   case 7:
-#line 131 "parser.y"
+#line 158 "parser.y"
                                                         {TRAN("dec","func_dec"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1698 "y.tab.c"
     break;
 
   case 8:
-#line 134 "parser.y"
+#line 161 "parser.y"
                                                                         {TRAN("var_dec","var ID;");TreeNode* tn = getTreeNode(Token_var_dec); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[-1].tn); (yyval.tn) = tn;}
 #line 1704 "y.tab.c"
     break;
 
   case 9:
-#line 135 "parser.y"
+#line 162 "parser.y"
                                                                                                                                 {TRAN("var_dec","var ID[];");TreeNode* tn = getTreeNode(Token_var_dec); tn->child[0] = (yyvsp[-5].tn); tn->child[1] = (yyvsp[-4].tn); tn->child[2] = (yyvsp[-2].tn); (yyval.tn) = tn;}
 #line 1710 "y.tab.c"
     break;
 
   case 10:
-#line 138 "parser.y"
+#line 165 "parser.y"
                                                         {TRAN("type", "Token_int"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1716 "y.tab.c"
     break;
 
   case 11:
-#line 139 "parser.y"
+#line 166 "parser.y"
                                                         {TRAN("type", "Token_void"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1722 "y.tab.c"
     break;
 
   case 12:
-#line 142 "parser.y"
+#line 169 "parser.y"
                                                                                                         {TRAN("func_dec","func()");TreeNode* tn = getTreeNode(Token_func); tn->child[0] = (yyvsp[-4].tn); tn->child[1] = (yyvsp[-3].tn); tn->child[2] = (yyvsp[-1].tn); (yyval.tn) = tn;}
 #line 1728 "y.tab.c"
     break;
 
   case 13:
-#line 143 "parser.y"
+#line 170 "parser.y"
                                                         {TRAN("func_dec","compoud"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1734 "y.tab.c"
     break;
 
   case 14:
-#line 146 "parser.y"
+#line 173 "parser.y"
                                                         {TRAN("params","params_list"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1740 "y.tab.c"
     break;
 
   case 15:
-#line 147 "parser.y"
+#line 174 "parser.y"
                                                         {TRAN("params","void"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1746 "y.tab.c"
     break;
 
   case 16:
-#line 150 "parser.y"
+#line 177 "parser.y"
                                                         {TRAN("params_list","param params_list_sub");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1752 "y.tab.c"
     break;
 
   case 17:
-#line 153 "parser.y"
+#line 180 "parser.y"
                                                                 {TRAN("params_list_sub",",param params_list_sub");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1758 "y.tab.c"
     break;
 
   case 18:
-#line 154 "parser.y"
+#line 181 "parser.y"
                                                         {TRAN("params_list_sub","epsilon"); (yyval.tn) = NULL; }
 #line 1764 "y.tab.c"
     break;
 
   case 19:
-#line 158 "parser.y"
+#line 185 "parser.y"
                                                         {TRAN("param","var ID");TreeNode* tn = getTreeNode(Token_para); tn->child[0] = (yyvsp[-1].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1770 "y.tab.c"
     break;
 
   case 20:
-#line 159 "parser.y"
+#line 186 "parser.y"
                                                                                                         {TRAN("param","var ID[]");TreeNode* tn = getTreeNode(Token_para); tn->child[0] = (yyvsp[-3].tn); tn->child[1] = (yyvsp[-2].tn); tn->child[2] = (TreeNode*)0x1; (yyval.tn) = tn;}
 #line 1776 "y.tab.c"
     break;
 
   case 21:
-#line 162 "parser.y"
+#line 189 "parser.y"
                                                                                                 {TRAN("compoud","{ local_dec stmt_list }");TreeNode* tn = getTreeNode(Token_compound); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[-1].tn); (yyval.tn) = tn;}
 #line 1782 "y.tab.c"
     break;
 
   case 22:
-#line 165 "parser.y"
+#line 192 "parser.y"
                                                         {TRAN("local_dec","var_dec local_dec");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1788 "y.tab.c"
     break;
 
   case 23:
-#line 166 "parser.y"
+#line 193 "parser.y"
                                                         {TRAN("local_dec","epsilon"); (yyval.tn) = NULL; }
 #line 1794 "y.tab.c"
     break;
 
   case 24:
-#line 169 "parser.y"
+#line 196 "parser.y"
                                                         {TRAN("stmt_list","statement stmt_list");TreeNode* tn = (yyvsp[-1].tn); if(tn == NULL) tn = (yyvsp[0].tn); else tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1800 "y.tab.c"
     break;
 
   case 25:
-#line 170 "parser.y"
+#line 197 "parser.y"
                                                         {TRAN("stmt_list","epsilon"); (yyval.tn) = NULL; }
 #line 1806 "y.tab.c"
     break;
 
   case 26:
-#line 173 "parser.y"
+#line 200 "parser.y"
                                                         {TRAN("statement","exp_st"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1812 "y.tab.c"
     break;
 
   case 27:
-#line 174 "parser.y"
+#line 201 "parser.y"
                                                         {TRAN("statement","compoud"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1818 "y.tab.c"
     break;
 
   case 28:
-#line 175 "parser.y"
+#line 202 "parser.y"
                                                         {TRAN("statement","selection_st"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1824 "y.tab.c"
     break;
 
   case 29:
-#line 176 "parser.y"
+#line 203 "parser.y"
                                                         {TRAN("statement","iteration_st"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1830 "y.tab.c"
     break;
 
   case 30:
-#line 177 "parser.y"
+#line 204 "parser.y"
                                                         {TRAN("statement","return_st"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1836 "y.tab.c"
     break;
 
   case 31:
-#line 180 "parser.y"
+#line 207 "parser.y"
                                                                         {TRAN("exp_st","exp;"); (yyval.tn) = (yyvsp[-1].tn); }
 #line 1842 "y.tab.c"
     break;
 
   case 32:
-#line 181 "parser.y"
+#line 208 "parser.y"
                                                                         {TRAN("exp_st",";"); (yyval.tn) = NULL; }
 #line 1848 "y.tab.c"
     break;
 
   case 33:
-#line 184 "parser.y"
+#line 211 "parser.y"
                                                                                                 {TRAN("selection_st","if exp"); TreeNode* tn = getTreeNode(Token_if); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1854 "y.tab.c"
     break;
 
   case 34:
-#line 185 "parser.y"
+#line 212 "parser.y"
                                                                                                                         {TRAN("selection_st","if_else"); TreeNode* tn = getTreeNode(Token_if); tn->child[0] = (yyvsp[-4].tn); tn->child[1] = (yyvsp[-2].tn); tn->child[2] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1860 "y.tab.c"
     break;
 
   case 35:
-#line 188 "parser.y"
+#line 215 "parser.y"
                                                                                                         {TRAN("iteration_st","while exp");TreeNode* tn = getTreeNode(Token_while); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1866 "y.tab.c"
     break;
 
   case 36:
-#line 191 "parser.y"
+#line 218 "parser.y"
                                                                         {TRAN("return_st","return;");TreeNode* tn = getTreeNode(Token_return); (yyval.tn) = tn;}
 #line 1872 "y.tab.c"
     break;
 
   case 37:
-#line 192 "parser.y"
+#line 219 "parser.y"
                                                                         {TRAN("return_st","return exp;");TreeNode* tn = getTreeNode(Token_return); tn->child[0] = (yyvsp[-1].tn); (yyval.tn) = tn;}
 #line 1878 "y.tab.c"
     break;
 
   case 38:
-#line 195 "parser.y"
+#line 222 "parser.y"
                                                         {TRAN("exp","var = exp");TreeNode* tn = getTreeNode(Token_assign); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1884 "y.tab.c"
     break;
 
   case 39:
-#line 196 "parser.y"
+#line 223 "parser.y"
                                                         {TRAN("exp","simple_exp");(yyval.tn) = (yyvsp[0].tn);}
 #line 1890 "y.tab.c"
     break;
 
   case 40:
-#line 199 "parser.y"
+#line 226 "parser.y"
                                                         {TRAN("var","identifier");TreeNode* tn = getTreeNode(Token_var); tn->child[0] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1896 "y.tab.c"
     break;
 
   case 41:
-#line 200 "parser.y"
+#line 227 "parser.y"
                                                                                                 {TRAN("var","identifier[]");TreeNode* tn = getTreeNode(Token_var); tn->child[0] = (yyvsp[-3].tn); tn->child[1] = (yyvsp[-1].tn); (yyval.tn) = tn;}
 #line 1902 "y.tab.c"
     break;
 
   case 42:
-#line 203 "parser.y"
+#line 230 "parser.y"
                                                         {TRAN("simple_exp","additive_exp lop additive_exp");TreeNode* tn = (yyvsp[-1].tn); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1908 "y.tab.c"
     break;
 
   case 43:
-#line 204 "parser.y"
+#line 231 "parser.y"
                                                         {TRAN("simple_exp","additive_exp"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1914 "y.tab.c"
     break;
 
   case 44:
-#line 207 "parser.y"
+#line 234 "parser.y"
                                                         {TRAN("relop","<"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1920 "y.tab.c"
     break;
 
   case 45:
-#line 208 "parser.y"
+#line 235 "parser.y"
                                                         {TRAN("relop","<="); (yyval.tn) = (yyvsp[0].tn); }
 #line 1926 "y.tab.c"
     break;
 
   case 46:
-#line 209 "parser.y"
+#line 236 "parser.y"
                                                         {TRAN("relop",">"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1932 "y.tab.c"
     break;
 
   case 47:
-#line 210 "parser.y"
+#line 237 "parser.y"
                                                         {TRAN("relop",">="); (yyval.tn) = (yyvsp[0].tn); }
 #line 1938 "y.tab.c"
     break;
 
   case 48:
-#line 211 "parser.y"
+#line 238 "parser.y"
                                                         {TRAN("relop","=="); (yyval.tn) = (yyvsp[0].tn); }
 #line 1944 "y.tab.c"
     break;
 
   case 49:
-#line 212 "parser.y"
+#line 239 "parser.y"
                                                         {TRAN("relop","!="); (yyval.tn) = (yyvsp[0].tn); }
 #line 1950 "y.tab.c"
     break;
 
   case 50:
-#line 215 "parser.y"
+#line 242 "parser.y"
                                                         {TRAN("additive_exp","additive_exp addop term");TreeNode* tn = (yyvsp[-1].tn); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1956 "y.tab.c"
     break;
 
   case 51:
-#line 216 "parser.y"
+#line 243 "parser.y"
                                                         {TRAN("additive_exp","term"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1962 "y.tab.c"
     break;
 
   case 52:
-#line 219 "parser.y"
+#line 246 "parser.y"
                                                         {TRAN("addop","+"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1968 "y.tab.c"
     break;
 
   case 53:
-#line 220 "parser.y"
+#line 247 "parser.y"
                                                         {TRAN("addop","-"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1974 "y.tab.c"
     break;
 
   case 54:
-#line 223 "parser.y"
+#line 250 "parser.y"
                                                         {TRAN("term","term mulop factor");TreeNode* tn = (yyvsp[-1].tn); tn->child[0] = (yyvsp[-2].tn); tn->child[1] = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 1980 "y.tab.c"
     break;
 
   case 55:
-#line 224 "parser.y"
+#line 251 "parser.y"
                                                         {TRAN("term","factor"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1986 "y.tab.c"
     break;
 
   case 56:
-#line 227 "parser.y"
+#line 254 "parser.y"
                                                         {TRAN("mulop","*"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1992 "y.tab.c"
     break;
 
   case 57:
-#line 228 "parser.y"
+#line 255 "parser.y"
                                                         {TRAN("mulop","/"); (yyval.tn) = (yyvsp[0].tn); }
 #line 1998 "y.tab.c"
     break;
 
   case 58:
-#line 231 "parser.y"
+#line 258 "parser.y"
                                                                                                 {TRAN("factor","(exp)"); (yyval.tn) = (yyvsp[-1].tn); }
 #line 2004 "y.tab.c"
     break;
 
   case 59:
-#line 232 "parser.y"
+#line 259 "parser.y"
                                                         {TRAN("factor","var"); (yyval.tn) = (yyvsp[0].tn); }
 #line 2010 "y.tab.c"
     break;
 
   case 60:
-#line 233 "parser.y"
+#line 260 "parser.y"
                                                         {TRAN("factor","call"); (yyval.tn) = (yyvsp[0].tn); }
 #line 2016 "y.tab.c"
     break;
 
   case 61:
-#line 234 "parser.y"
+#line 261 "parser.y"
                                                         {TRAN("factor","num"); (yyval.tn) = (yyvsp[0].tn); }
 #line 2022 "y.tab.c"
     break;
 
   case 62:
-#line 237 "parser.y"
+#line 264 "parser.y"
                                                                                                 {TRAN("call","id, args"); TreeNode* tn = getTreeNode(Token_call); tn->child[0] = (yyvsp[-3].tn); tn->child[1] = (yyvsp[-1].tn); (yyval.tn) = tn;}
 #line 2028 "y.tab.c"
     break;
 
   case 63:
-#line 240 "parser.y"
+#line 267 "parser.y"
                                                         {TRAN("args","arg_list"); (yyval.tn) = (yyvsp[0].tn); }
 #line 2034 "y.tab.c"
     break;
 
   case 64:
-#line 241 "parser.y"
+#line 268 "parser.y"
                                                         {TRAN("args","epsilon"); (yyval.tn) = NULL; }
 #line 2040 "y.tab.c"
     break;
 
   case 65:
-#line 244 "parser.y"
+#line 271 "parser.y"
                                                         {TRAN("arg_list","exp, arg_list_sub");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 2046 "y.tab.c"
     break;
 
   case 66:
-#line 247 "parser.y"
+#line 274 "parser.y"
                                                                 {TRAN("arg_list_sub","comma, exp, arg_list_sub");TreeNode* tn = (yyvsp[-1].tn); tn->sibling = (yyvsp[0].tn); (yyval.tn) = tn;}
 #line 2052 "y.tab.c"
     break;
 
   case 67:
-#line 248 "parser.y"
+#line 275 "parser.y"
                                                         {TRAN("arg_list_sub","epsilon"); (yyval.tn) = NULL; }
 #line 2058 "y.tab.c"
     break;
@@ -2283,8 +2283,12 @@ yyreturn:
   return yyresult;
 }
 
-#line 250 "parser.y"
+#line 277 "parser.y"
 
+
+// void reset_yyin(){
+//   yylex_destory();
+// }
 
 // int main() 	{
 //     yyparse();

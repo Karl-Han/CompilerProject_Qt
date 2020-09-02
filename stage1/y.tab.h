@@ -73,7 +73,7 @@ extern int yydebug;
     Token_assign = 274,            /* Token_assign  */
     Token_semicolon = 275,         /* Token_semicolon  */
     Token_comma = 276,             /* Token_comma  */
-    Toekn_smallBracket_left = 277, /* Toekn_smallBracket_left  */
+    Token_smallBracket_left = 277, /* Token_smallBracket_left  */
     Token_smallBracket_right = 278, /* Token_smallBracket_right  */
     Token_middleBracket_left = 279, /* Token_middleBracket_left  */
     Token_middleBracket_right = 280, /* Token_middleBracket_right  */
@@ -116,7 +116,7 @@ extern int yydebug;
 #define Token_assign 274
 #define Token_semicolon 275
 #define Token_comma 276
-#define Toekn_smallBracket_left 277
+#define Token_smallBracket_left 277
 #define Token_smallBracket_right 278
 #define Token_middleBracket_left 279
 #define Token_middleBracket_right 280
