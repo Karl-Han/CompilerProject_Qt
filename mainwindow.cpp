@@ -54,15 +54,18 @@ extern "C"
 #include "CompilerProject/token.h"
 #include "CompilerProject/gen_dot.h"
 #include "CompilerProject/lexee.h"
+#include "CompilerProject/code.h"
     int yyparse();
     extern void yyrestart(FILE*);
     // extern void reset_lex();
-    // extern int yylex_destroy();
-    // extern void flush_buffer();
     char *gen_dot_str(TreeNode *);
     extern FILE *yyin;
     extern FILE *stderr;
     extern TreeNode *root;
+    extern int emitLoc;
+    extern int highEmitLoc;
+    extern int yylex_destroy();
+    extern int yywrap();
 }
 
 std::string ios_str = "int input(void){ int x; read x; return x; }  void output(int x){ write x; return; }";
@@ -106,29 +109,54 @@ std::string file2string(FILE *f)
 
 void set_lexical_tableView(QStandardItemModel *model, LexeeLinkedlist *lexee);
 
+QString process_cgen(TreeNode* t){
+        // code generation
+        code = fopen("temp.tm", "w+");
+        build_symtabs(t);
+        type_check(t);
+        tag_kind(t);
+        code_generate(t);
+        // convert code to QString
+        rewind(code);
+        char buf[128];
+        QString s;
+        while(fgets(buf, sizeof(buf), code)){
+            // get line to buf then next line
+            QString temp_str = QString::fromLocal8Bit(buf);
+            s = s + temp_str;
+            memset(buf, 0, sizeof buf);
+        }
+        fclose(code);
+        return s;
+}
+
 // Main process function
 void MainWindow::process(std::string s)
 {
-    // prepare for failure of parsing
-    // std::stringstream buffer;
-
+    // get the source code to fp
     FILE *fp = tmpfile();
-    fprintf(fp, "%s", ios_str.c_str());
+    fprintf(fp, "%s\n", ios_str.c_str());
     fprintf(fp, "%s", s.c_str());
     std::rewind(fp);
     yyin = fp;
-    // flush_buffer();
 
+    // redirect stderr to capture
     std::string str;
     char buf[128];
     memset(buf, 0, sizeof(buf));
     char *filename = "tmp";
     FILE *capture = freopen(filename, "w", stderr);
-    int ret = yyparse();
-    fclose(capture);
-    // yylex_destroy();
-    // reset_lex();
 
+    // lex and parse
+    int ret = yyparse();
+    fclose(fp);
+    fclose(capture);
+
+    // destroy lex
+    yywrap();
+    yylex_destroy();
+
+    // print the error
     capture = fopen(filename, "r");
     while (fgets(buf, sizeof(buf), capture) != NULL)
     {
@@ -153,9 +181,13 @@ void MainWindow::process(std::string s)
         this->syntax_str = QString::fromLocal8Bit(ch);
         ui->textBrowser_syntax->setText(this->syntax_str);
         set_lexical_tableView(this->lexical_model, lexee);
-
+        tm_str = process_cgen(root);
+        free(root);
     }
-    fclose(fp);
+
+    // clean up
+    emitLoc = 0;
+    highEmitLoc = 0;
 }
 
 void set_lexical_tableView(QStandardItemModel *model, LexeeLinkedlist *lexee)
@@ -204,9 +236,6 @@ void MainWindow::on_pushButton_2_clicked()
     QString s = ui->textEdit->toPlainText();
     // process() is to call the analysis process
     process(s.toStdString());
-    // sd = new SynDialog(this, s_syn);
-    // sd->show();
-    // ui->textEdit->setText(s);
 }
 
 // Open file button
@@ -251,28 +280,9 @@ void MainWindow::on_radioButton_toggled(bool checked)
     }
 }
 
-QString process_cgen(TreeNode* t){
-        // code generation
-        code = fopen("temp.tm", "w+");
-        build_symtabs(t);
-        type_check(t);
-        tag_kind(t);
-        code_generate(t);
-        // convert code to QString
-        rewind(code);
-        char buf[128];
-        QString s;
-        while(fgets(buf, sizeof(buf), code)){
-            // get line to buf then next line
-            QString temp_str = QString::fromLocal8Bit(buf);
-            s = s + temp_str;
-        }
-        return s;
-}
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    tm_str = process_cgen(root);
     d = new Dialog(this, tm_str);
     d->show();
 }

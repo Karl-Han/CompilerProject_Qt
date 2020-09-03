@@ -9,11 +9,6 @@
 #include <fstream>
 #include <string>
 
-extern "C" {
-    #include "tm.h"
-    int run();
-}
-
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -57,8 +52,4 @@ void Dialog::on_pushButton_clicked()
          tr("ERROR"),
          tr("Invalid filename, Please save it again."));
     }
-}
-
-void Dialog::on_pushButton_2_clicked()
-{
 }

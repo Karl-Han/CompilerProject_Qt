@@ -19,7 +19,6 @@ SOURCES += \
     dialog.cpp \
     mainwindow.cpp \
     main.cpp \
-    TM.c \
     CompilerProject/y.tab.c \
     CompilerProject/lex.yy.c \
     CompilerProject/gen_dot.c \
@@ -38,8 +37,7 @@ HEADERS += \
     CompilerProject/analyze.h \
     CompilerProject/cgen.h \
     CompilerProject/code.h \
-    CompilerProject/tables.h \
-    tm.h
+    CompilerProject/tables.h
 
 
 FORMS += \
@@ -52,9 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    CompilerProject.pro.user \
     CompilerProject/README.md \
     CompilerProject/y.output
-
-RESOURCES += \
-    myrsc.qrc
