@@ -1,0 +1,3 @@
+[submodule "CompilerProject"]
+	path = CompilerProject
+	url = https://github.com/Karl-Han/CompilerProject.git

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>CompilerProject/ios_wrapper.cpp</file>
+    </qresource>
+</RCC>

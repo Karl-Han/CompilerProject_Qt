@@ -16,20 +16,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dialog.cpp \
     mainwindow.cpp \
     main.cpp \
-    stage1/y.tab.c \
-    stage1/lex.yy.c \
-    stage1/gen_dot.c
+    TM.c \
+    CompilerProject/y.tab.c \
+    CompilerProject/lex.yy.c \
+    CompilerProject/gen_dot.c \
+    CompilerProject/analyze.cpp \
+    CompilerProject/cgen.cpp \
+    CompilerProject/code.cpp \
+    CompilerProject/tables.cpp
 
 HEADERS += \
+    dialog.h \
     mainwindow.h \
-    stage1/y.tab.h \
-    stage1/token.h \
-    stage1/lexee.h \
-    stage1/gen_dot.h
+    CompilerProject/y.tab.h \
+    CompilerProject/token.h \
+    CompilerProject/lexee.h \
+    CompilerProject/gen_dot.h \
+    CompilerProject/analyze.h \
+    CompilerProject/cgen.h \
+    CompilerProject/code.h \
+    CompilerProject/tables.h \
+    tm.h
+
 
 FORMS += \
+    dialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -38,4 +52,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    CompilerProject.pro.user
+    CompilerProject.pro.user \
+    CompilerProject/README.md \
+    CompilerProject/y.output
+
+RESOURCES += \
+    myrsc.qrc

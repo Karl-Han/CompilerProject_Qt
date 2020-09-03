@@ -37,9 +37,8 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
-#include <iostream>
-#include <sstream>
+#include "CompilerProject/analyze.h"
+#include "CompilerProject/cgen.h"
 
 #include <QMessageBox>
 #include <QString>
@@ -47,23 +46,28 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QStandardItemModel>
+#include <string>
 
 extern "C"
 {
-#include "stage1/y.tab.h"
-#include "stage1/token.h"
-#include "stage1/gen_dot.h"
-#include "stage1/lexee.h"
+#include "CompilerProject/y.tab.h"
+#include "CompilerProject/token.h"
+#include "CompilerProject/gen_dot.h"
+#include "CompilerProject/lexee.h"
     int yyparse();
     extern void yyrestart(FILE*);
     // extern void reset_lex();
     // extern int yylex_destroy();
-    extern void flush_buffer();
+    // extern void flush_buffer();
     char *gen_dot_str(TreeNode *);
     extern FILE *yyin;
     extern FILE *stderr;
     extern TreeNode *root;
 }
+
+std::string ios_str = "int input(void){ int x; read x; return x; }  void output(int x){ write x; return; }";
+
+FILE* code;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -106,13 +110,14 @@ void set_lexical_tableView(QStandardItemModel *model, LexeeLinkedlist *lexee);
 void MainWindow::process(std::string s)
 {
     // prepare for failure of parsing
-    std::stringstream buffer;
+    // std::stringstream buffer;
 
     FILE *fp = tmpfile();
+    fprintf(fp, "%s", ios_str.c_str());
     fprintf(fp, "%s", s.c_str());
     std::rewind(fp);
     yyin = fp;
-    flush_buffer();
+    // flush_buffer();
 
     std::string str;
     char buf[128];
@@ -148,6 +153,7 @@ void MainWindow::process(std::string s)
         this->syntax_str = QString::fromLocal8Bit(ch);
         ui->textBrowser_syntax->setText(this->syntax_str);
         set_lexical_tableView(this->lexical_model, lexee);
+
     }
     fclose(fp);
 }
@@ -243,4 +249,30 @@ void MainWindow::on_radioButton_toggled(bool checked)
         ui->tableView_lexical->setVisible(false);
         ui->textBrowser_syntax->setVisible(true);
     }
+}
+
+QString process_cgen(TreeNode* t){
+        // code generation
+        code = fopen("temp.tm", "w+");
+        build_symtabs(t);
+        type_check(t);
+        tag_kind(t);
+        code_generate(t);
+        // convert code to QString
+        rewind(code);
+        char buf[128];
+        QString s;
+        while(fgets(buf, sizeof(buf), code)){
+            // get line to buf then next line
+            QString temp_str = QString::fromLocal8Bit(buf);
+            s = s + temp_str;
+        }
+        return s;
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    tm_str = process_cgen(root);
+    d = new Dialog(this, tm_str);
+    d->show();
 }

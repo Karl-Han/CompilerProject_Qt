@@ -3,3 +3,4 @@
 CompilerProject.pro.user
 
 !stage1/.gitignore
+.DS_Store

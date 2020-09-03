@@ -34,6 +34,8 @@
  * 
  */
 
+bool TraceCode = true;
+
 #include "mainwindow.h"
 #include <QApplication>
 

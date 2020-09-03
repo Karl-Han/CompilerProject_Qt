@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QStandardItem>
 
+#include "dialog.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -21,6 +23,7 @@ public:
     // QString lexical_str;
     QStandardItemModel *lexical_model;
     QString syntax_str;
+    QString tm_str;
 
 private slots:
     void on_pushButton_clicked();
@@ -31,10 +34,14 @@ private slots:
 
     void on_radioButton_toggled(bool checked);
 
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Dialog *d;
 
     // customized section
     void process(std::string);
 };
+
 #endif // MAINWINDOW_H

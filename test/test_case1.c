@@ -15,25 +15,24 @@
  */
 
 int arr[10];
+int brr[20];
 
-int main(int num1, void id2, int num3){
-    num1 = 123;
-    num3 = 456;
-    return num1 + num3 + 1;
-}
-
-void proc1(void)
-void proc2(int arr[]){
+int proc2(int brr[]){
     /* This is comment and local-declarations test */
     int arr[12];
-    void v;
 
     /* statement list test */
     ;;;
-    proc1();
-}
-{
-    return 0;
+    brr[1] = 1;
+    arr[2] = input();
+    return arr[2] - brr[1];
 }
 
-int brr[20];
+void main(void){
+    int num1;
+    int num3;
+    num1 = 123;
+    num3 = proc2(arr);
+    output(num3);
+    return ;
+}
